@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function(){
     let boton = document.getElementById("botoncito");
     let inputUsuario = document.getElementById("inputUsuario"); 
     let inputContraseña = document.getElementById("inputContraseña");
@@ -12,5 +12,4 @@ else {alert("Necesitas rellenar ambos campos de datos!")}
    
     });
     
-   
 });
