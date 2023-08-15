@@ -4,8 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let inputContraseña = document.getElementById("inputContraseña");
     
     boton.addEventListener("click", function() {
-       if ((inputContraseña.value && inputUsuario.value) !== "")
-       { window.location.href = "index.html";}
+       if ((inputUsuario.value !== "") && (inputContraseña.value !== ""))
+       
+    { window.location.href = "index.html";} 
+else {alert("Necesitas rellenar ambos campos de datos!")}
        
    
     });
