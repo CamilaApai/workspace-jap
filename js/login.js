@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function() {
     
     boton.addEventListener("click", function(event) {
         event.preventDefault();
-       if ((inputUsuario.value !== "") && (inputContraseña.value !== ""))
-       
-    { window.location.href = "index.html";} 
-else {alert("Necesitas rellenar ambos campos de datos!")}
-       
-   
+        
+        if (inputUsuario.value !== "" && inputContraseña.value !== "") {
+            localStorage.setItem("usuarioInicioSesion", "true");
+            window.location.href = "index.html";
+        } else {
+            alert("Necesitas rellenar ambos campos de datos!");
+        }
     });
-    
 });
