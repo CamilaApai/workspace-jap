@@ -20,5 +20,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Si al menos uno de los campos está vacío, muestra una alerta para informar al usuario.
             alert("Necesitas rellenar ambos campos de datos!");
         }
+        // Verifica si se ha ingresado un valor en el campo de usuario y en el campo de contraseña
+        if (inputUsuario.value !== "" && inputContraseña.value !== "") {
+        // Si ambos campos tienen valores no vacíos, procede a marcar al usuario como "inició sesión"
+         // Almacena en el almacenamiento local (localStorage) un indicador de que el usuario inició sesión
+        localStorage.setItem("usuarioInicioSesion", "true");
+        }
     });
 });
