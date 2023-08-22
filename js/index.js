@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
    
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
@@ -19,4 +19,13 @@ document.addEventListener("DOMContentLoaded", function(){
     if (!usuarioInicioSesion) {
         window.location.href = "login.html"; 
     }
+
+   
+    const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
+    const usuariovalue = localStorage.getItem('usuariovalue');
+    if (usuariovalue !== null) {
+        enlaceInicioSesion.href = "login.html" 
+        enlaceInicioSesion.textContent = usuariovalue;
+    }
+
 });
