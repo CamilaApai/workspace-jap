@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded",function(){
     let usuarioInicioSesion = localStorage.getItem("usuarioInicioSesion");
     
     if (!usuarioInicioSesion) {
-        window.location.href = "login.html"; 
+        window.location.href = "my-profile.html"; 
     }
 
    
     const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
     const usuariovalue = localStorage.getItem('usuariovalue');
     if (usuariovalue !== null) {
-        enlaceInicioSesion.href = "login.html" 
+        enlaceInicioSesion.href = "my-profile.html" 
         enlaceInicioSesion.textContent = usuariovalue;
     }
 
