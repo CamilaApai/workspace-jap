@@ -1,6 +1,10 @@
 //array donde se cargarán los datos recibidos:
 let productsArray = [];
 
+function setCatID(id) {
+    localStorage.setItem("catID", id);
+}
+
 //función que recibe un array con los datos, y los muestra en pantalla a través del DOM
 function showProductsList(array){
     let htmlContentToAppend = "";
@@ -8,7 +12,8 @@ function showProductsList(array){
     for(let i = 0; i < array.length; i++){ 
         let products = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+
+        <div onclick="setCatID(${products.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + products.image + `" alt="product image" class="img-thumbnail">
@@ -36,8 +41,6 @@ function showProductsList(array){
 }
      
 
-
-
 // Una vez quese carga la página se llama a getJSONData() pasándole por parámetro la constante que contiene la url del json para obtener la lista de autos.
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(autitosURL).then(function(resultObj){
@@ -51,3 +54,10 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 });
+
+
+
+
+
+
+
