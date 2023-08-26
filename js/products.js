@@ -1,16 +1,7 @@
 //Inicializa un array vacio donde se cargarán los datos recibidos e inicializa una variable
 let productsArray = [];
-<<<<<<< HEAD
 let htmlContentToAppend = "";
 //Función que recibe un array como parametro
-=======
-
-function setCatID(id) {
-    localStorage.setItem("catID", id);
-}
-
-//función que recibe un array con los datos, y los muestra en pantalla a través del DOM
->>>>>>> main
 function showProductsList(array){
 //Recorre el array y le concatena la info de los elementos requeridos del array de objetos "products" a htmlContentToAppend por cada valor de i
     for(let i = 0; i < array.length; i++){ 
@@ -45,13 +36,9 @@ function showProductsList(array){
 }
      
 
-<<<<<<< HEAD
 
 
 //Una vez que carga la página se usa getJSONData(autitosURL) para obtener la lista de autos
-=======
-// Una vez quese carga la página se llama a getJSONData() pasándole por parámetro la constante que contiene la url del json para obtener la lista de autos.
->>>>>>> main
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(autitosURL).then(function(resultObj){
       //Se verifica el estado del objeto que devuelve, y si es correcto, se cargan los datos en productsArray
