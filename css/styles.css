@@ -27,6 +27,10 @@ nav a {
     font-size: 3.5rem;
   }
 }
+#alertaContainer {
+  color: red;
+  font-size: 85%;
+}
 
 .jumbotron {
   height: 50vh;
