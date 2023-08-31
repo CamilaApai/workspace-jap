@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded",function(){
     let usuarioInicioSesion = localStorage.getItem("usuarioInicioSesion");
     
     if (!usuarioInicioSesion) {
-        window.location.href = "my-profile.html"; 
+        window.location.href = "login.html"; 
     }
 
    
