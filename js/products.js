@@ -2,6 +2,10 @@
 let productsArray = [];
 let htmlContentToAppend = "";
 
+function setCatID(id) {
+    localStorage.setItem("catID", id);
+}
+
 //Función que recibe un array como parametro
 function showProductsList(array) {
     htmlContentToAppend = ""; // Limpia el contenido anterior antes de rellenar el nuevo
