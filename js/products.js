@@ -1,6 +1,11 @@
 //Inicializa un array vacio donde se cargarán los datos recibidos e inicializa una variable
 let productsArray = [];
 let htmlContentToAppend = "";
+
+function setCatID(id) {
+    localStorage.setItem("catID", id);
+}
+
 //Función que recibe un array como parametro
 function showProductsList(array){
 //Recorre el array y le concatena la info de los elementos requeridos del array de objetos "products" a htmlContentToAppend por cada valor de i
