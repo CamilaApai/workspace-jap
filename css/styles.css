@@ -21,6 +21,17 @@ nav a {
   -ms-user-select: none;
   user-select: none;
 }
+.card-header {
+  font-weight: bold;
+}
+#comentariosP {
+  font-size: 150%;
+}
+.amarillo {
+  background-color: #FFEEBA; 
+  border-radius: 0.5rem;
+  
+}
 
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
