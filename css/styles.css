@@ -8,9 +8,21 @@
 .jumbotron .display-4 {
   font-weight: bold;
 }
+#exampleFormControlTextarea1  {
+max-width: 350px;
+}
+#puntuacionID {
+  max-width: 350px;
 
+}
 nav a {
   text-decoration: none;
+}
+.card-footer {
+  background-color: transparent
+}
+.card-header {
+  background-color: transparent
 }
 
 .bd-placeholder-img {
@@ -28,9 +40,11 @@ nav a {
   font-size: 150%;
 }
 .amarillo {
-  background-color: #FFEEBA; 
+  border: 1px solid #000000;
   border-radius: 0.5rem;
-  
+}
+.fa  {
+  color: #fdb72b
 }
 
 @media (min-width: 768px) {
