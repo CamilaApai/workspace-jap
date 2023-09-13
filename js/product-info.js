@@ -70,3 +70,78 @@
         .catch(err => console.log('Solicitud fallida', err));
     });
     
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Inicializa un array vacio donde se cargarán los datos recibidos e inicializa una variable
+let productsArray = [];
+let htmlContentToAppend = "";
+
+function setCatID(id) {
+    localStorage.setItem("catID", id);
+    window.location = "product-info.html"
+}
+
+//Función que recibe un array como parametro
+function showProduct(array, i) {
+  htmlContentToAppend = ""; // Limpia el contenido anterior antes de rellenar el nuevo
+
+  let product = array[i];
+  htmlContentToAppend += `
+      <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+          <div class="row">
+              <div class="col-3">
+                  <img src="${product.image}" alt="product image" class="img-thumbnail">
+              </div>
+              <div class="col">
+                  <div class="d-flex w-100 justify-content-between">
+                      <div class="mb-1">
+                          <h4>${product.name} - ${product.currency} ${product.cost}</h4>
+                          <p>${product.description}</p>
+                      </div>
+                      <small class="text-muted">${product.soldCount} artículos vendidos</small>
+                  </div>
+              </div>
+          </div>
+      </div>
+  `;
+
+  // Después de generar el código HTML para el elemento seleccionado, establece el contenido del contenedor
+  document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+}
+
+document.addEventListener("DOMContentLoaded", function(e) {
+    getJSONData(autitosURL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            productsArray = resultObj.data.products;
+            //showProductsList(productsArray);
+            showProduct(productsArray, 0 );
+        }
+    });
+});
+
+
+
+
+
+
+
+

@@ -4,6 +4,7 @@ let htmlContentToAppend = "";
 
 function setCatID(id) {
     localStorage.setItem("catID", id);
+    window.location = "product-info.html"
 }
 
 //Función que recibe un array como parametro
