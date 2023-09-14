@@ -4,30 +4,6 @@ let htmlContentToAppend = "";
 
 function setCatID(id) {
     localStorage.setItem("catID", id);
-    cargarProductosporCategoria(id);
-}
-
-
-function setProdID(idProd) {
-    localStorage.setItem("ProdID", idProd);
-    window.location.href = "product-info.html"; // Redirige a la página de información del producto
-}
-
-// Función que recibe un catID y carga los productos correspondientes
-function cargarProductosporCategoria(catID) {
-    // Crea el URL dinámico para obtener productos según el catID
-    const productsURL = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
-
-    // Realiza una solicitud para obtener los productos
-    getJSONData(productsURL).then(function(resultObj) {
-        if (resultObj.status === "ok") {
-            // Almacena los productos en el array productsArray
-            productsArray = resultObj.data.products;
-
-            // Muestra la lista de productos
-            showProductsList(productsArray);
-        }
-    });
 }
 
 //Función que recibe un array como parametro
@@ -36,7 +12,7 @@ function showProductsList(array) {
     for (let i = 0; i < array.length; i++) {
         let products = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action cursor-active" onclick="setProdID(${products.id})">
+        <div onclick="setCatID(${products.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="${products.image}" alt="product image" class="img-thumbnail">
@@ -58,18 +34,11 @@ function showProductsList(array) {
     document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
 
-
-// Evento que se ejecuta cuando la página se ha cargado completamente
 document.addEventListener("DOMContentLoaded", function(e) {
-    // Obtén el valor de "catID" del almacenamiento local
-    const catID = localStorage.getItem("catID");
-
-    if (catID) {
-        // Carga los productos según el catID
-        cargarProductosporCategoria(catID);
-    }
-
-
+    getJSONData(autitosURL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            productsArray = resultObj.data.products;
+            showProductsList(productsArray);
 
             // Resto del código para filtros y orden
 
@@ -85,8 +54,20 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 showProductsList(filteredProducts);
             });
         }
-);
+    });
+});
 
+
+// Evento que se ejecuta cuando la página se ha cargado completamente
+document.addEventListener("DOMContentLoaded", function(e) {
+    // Obtiene los datos de productos usando la función getJSONData
+    getJSONData(autitosURL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            // Almacena los productos en el array productsArray
+            productsArray = resultObj.data.products;
+
+            // Muestra la lista de productos por defecto al cargar la página
+            showProductsList(productsArray);
 
             document.getElementById("applyFilterBtn").addEventListener("click", function() {
                 const minPrice = parseFloat(document.getElementById("minPrice").value);
@@ -139,3 +120,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 // Muestra la lista de productos ordenados
                 showProductsList(sortedProducts);
             });
+        }
+    });
+});
+
+
+
+
+
+
