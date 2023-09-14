@@ -88,11 +88,21 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    const catID = localStorage.getItem("catID");
+
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
             showCategoriesList()
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
+        }
+    });
+
+    // Modificar la solicitud de productos para usar el catID
+    getJSONData(PRODUCTS_URL + "?category=" + catID).then(function(productsResultObj) {
+        if (productsResultObj.status === "ok") {
+            // Manejar la lista de productos de la categoría seleccionada
+            // Puedes utilizar productsResultObj.data para mostrar la lista de productos.
         }
     });
 
