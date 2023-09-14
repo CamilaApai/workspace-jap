@@ -20,6 +20,21 @@
     <div class="text-center p-4">
         <h2>Productos</h2>
         <p>Verás aquí todos los productos de la categoría Autos</p>
+
+        <!-- Filtros por rango de precio -->
+        <label for="minPrice">Precio mínimo:</label>
+        <input type="number" id="minPrice" min="0" >
+        <label for="maxPrice">Precio máximo:</label>
+        <input type="number" id="maxPrice" min="0">
+        <button id="applyFilterBtn" class="botonproductos">Aplicar Filtro</button>
+
+        <!-- Botones de orden -->
+        <button id="ascPriceBtn" class="botonproductos">Ascendente</button>
+        <button id="descPriceBtn" class="botonproductos">Descendente</button>
+        <button id="descRelevanceBtn"  class="botonproductos" >Relevancia descendente</button>
+
+        <!-- Campo de búsqueda en tiempo real -->
+        <input type="search" id="searchInput" placeholder="Buscar productos...">
     </div>
 
     <div class="container">
