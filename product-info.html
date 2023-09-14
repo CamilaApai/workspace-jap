@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -37,18 +38,62 @@
     </div>
   </nav>
   <main>
+
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <h2>Producto</h2>
+      <div class="row">
+        <div class="list-group" id="cat-list-container">
+          <!-- Aquí se llenará dinámicamente la información del producto -->
+        </div>
       </div>
     </div>
+
+
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+      </div>
+    </div>
+    <div id="containerInfo" class="container">
+      <h2 class="card-title">Comentarios</h2>
+      <div class="row" id="ulContenedor">
+        <!-- Las tarjetas de comentarios se agregarán aquí -->
+      </div>
+    </div>
+    <div id="containerInfo" class="container" class="list-group ">
+
+      <!-- <div class="card" style="width: 18rem;">  -->
+
+      <form>
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Danos tu opinión</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <p>Puntuación</p>
+        <select class="form-select form-select-sm" id="puntuacionID" aria-label=".form-select-sm example">
+          <option selected>Seleccione una opción</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <div class="mb-1 form-check">
+
+
+        </div>
+        <button type="submit" class="btn btn-warning">Comentar</button>
+      </form>
   </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
@@ -63,5 +108,6 @@
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
 </body>
+
 
 </html>
