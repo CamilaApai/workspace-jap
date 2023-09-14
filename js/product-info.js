@@ -1,146 +1,132 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const comentariosURL = "https://japceibal.github.io/emercado-api/products_comments/50921.json";
+document.addEventListener("DOMContentLoaded", function (e) {
+    // se obtiene el prodID almacenado en el almacenamiento local
+    const prodID = localStorage.getItem("ProdID");
   
-    fetch(comentariosURL)
-      .then(response => response.json())
-      .then(data => {
-        // Obtener el elemento contenedor donde se mostrarán las tarjetas de comentarios
-        const ulContenedor = document.getElementById('ulContenedor');
+    if (prodID) {
+      // Realiza una solicitud (fetch) a la API con el prodID para obtener los detalles del producto
+      const producotInfoURL = `https://japceibal.github.io/emercado-api/products/${prodID}.json`;
   
-        // Iterar a través de la lista de comentarios
-        data.forEach(comment => {
-          // Crear una tarjeta (card) Bootstrap para cada comentario
-          const comentarioCard = document.createElement('div');
-          comentarioCard.className = 'amarillo mb-3'; 
-          
-          
+      fetch(producotInfoURL)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          document.getElementById("producto-titulo").textContent = data.name;
+          document.getElementById("producto-descripcion").textContent =
+            data.description;
+          document.getElementById(
+            "producto-precio"
+          ).textContent = `${data.currency} ${data.cost}`;
+          document.getElementById(
+            "producto-categoria"
+          ).textContent = `${data.category}`;
+          document.getElementById(
+            "producto-vendidos"
+          ).textContent = `${data.soldCount}`;
   
-          // Crear el encabezado de la tarjeta (nombre de usuario y fecha)
-          const cardHeader = document.createElement('div');
-          cardHeader.className = 'card-header';
-          comentarioCard.className = 'amarillo mb-3';
-          // Nombre de usuario
-          const username = document.createElement('span');
-          username.className = 'font-weight-bold';
-          username.textContent = comment.user;
-          cardHeader.appendChild(username);
-          
-          // Fecha del comentario
-          const commentDate = document.createElement('span');
-          commentDate.className = 'float-end text-muted';
-          commentDate.textContent = comment.dateTime;
-          cardHeader.appendChild(commentDate);
-          
-          comentarioCard.appendChild(cardHeader);
+          // Actualiza las imágenes del producto
+          const contenedorImagenes = document.getElementById("product-images");
   
-          // Crear el cuerpo de la tarjeta (contenido del comentario)
-          const cardBody = document.createElement('div');
-          cardBody.className = 'card-body';
-          
+          // Crea un div con la clase "row" para envolver las imágenes
+          const rowDiv = document.createElement("div");
+          rowDiv.className = "row";
   
-          // Crear un párrafo para el comentario
-          const pComment = document.createElement('p');
-          pComment.className = 'card-text';
-          pComment.textContent = comment.description;
-          cardBody.appendChild(pComment);
+          data.images.forEach(function (imageUrl) {
+            // Crea un div con la clase "col" para cada imagen
+            const colDiv = document.createElement("div");
+            colDiv.className = "col";
   
-          comentarioCard.appendChild(cardBody);
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            imgElement.className = "img-fluid"; // Para que las imágenes sean responsivas
   
-          // Crear el pie de la tarjeta (puntuación)
-          const cardFooter = document.createElement('div');
-          cardFooter.className = 'card-footer text-muted';
+            colDiv.appendChild(imgElement);
+            rowDiv.appendChild(colDiv);
+          });
   
-          // Crear estrellas para mostrar la puntuación
-          const puntuacion = document.createElement('span');
-          puntuacion.innerHTML = 'Puntuación: ';
-          for (let i = 1; i <= 5; i++) {
-            const starIcon = document.createElement('i');
-            starIcon.className = `fa fa-star${i <= comment.score ? '' : '-o'}`;
-            
-            puntuacion.appendChild(starIcon);
-          }
-          cardFooter.appendChild(puntuacion);
+          // Agrega la fila de imágenes al contenedor de imágenes del producto
+          contenedorImagenes.appendChild(rowDiv);
   
-          comentarioCard.appendChild(cardFooter);
-  
-          // Agregar la tarjeta al contenedor de tarjetas
-          ulContenedor.appendChild(comentarioCard);
+          // Después de mostrar la información del producto, obtén y muestra los comentarios
+          obtenerYMostrarComentarios(prodID);
+        })
+        .catch(function (error) {
+          console.error("Error al obtener los detalles del producto:", error);
         });
-      })
-      .catch(err => console.log('Solicitud fallida', err));
+    } else {
+      // Maneja el caso en el que no haya un prodID en el almacenamiento local.
+      // Puedes mostrar un mensaje de error o redirigir a la página de inicio.
+      alert("No funcionó");
+    }
+  
+    function obtenerYMostrarComentarios(prodID) {
+      // Realiza una solicitud (fetch) para obtener los comentarios del producto
+      const comentariosURL = `https://japceibal.github.io/emercado-api/products_comments/${prodID}.json`;
+  
+      fetch(comentariosURL)
+        .then((response) => response.json())
+        .then((data) => {
+          // Obtener el elemento contenedor donde se mostrarán las tarjetas de comentarios
+          const ulContenedor = document.getElementById("ulContenedor");
+  
+          // Iterar a través de la lista de comentarios
+          data.forEach((comment) => {
+            // Crear una tarjeta (card) Bootstrap para cada comentario
+            const comentarioCard = document.createElement("div");
+            comentarioCard.className = "card mb-3";
+  
+            // Crear el encabezado de la tarjeta (nombre de usuario y fecha)
+            const cardHeader = document.createElement("div");
+            cardHeader.className = "card-header";
+            // comentarioCard.className = 'card mb-3';
+            // Nombre de usuario
+            const username = document.createElement("h6");
+            username.className = "card-subtitle text-muted";
+            username.textContent = comment.user;
+            cardHeader.appendChild(username);
+  
+            // Fecha del comentario
+            const commentDate = document.createElement("small");
+            commentDate.className = "text-muted float-end";
+            commentDate.textContent = comment.dateTime;
+            cardHeader.appendChild(commentDate);
+  
+            comentarioCard.appendChild(cardHeader);
+  
+            // Crear el cuerpo de la tarjeta (contenido del comentario)
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+  
+            // Crear un párrafo para el comentario
+            const pComment = document.createElement("p");
+            pComment.className = "card-text";
+            pComment.textContent = comment.description;
+            cardBody.appendChild(pComment);
+  
+            comentarioCard.appendChild(cardBody);
+  
+            // Crear el pie de la tarjeta (puntuación)
+            const cardFooter = document.createElement("div");
+            cardFooter.className = "card-footer text-muted";
+  
+            // Crear estrellas para mostrar la puntuación
+            const puntuacion = document.createElement("p");
+            puntuacion.innerHTML = "Puntuación: ";
+            for (let i = 1; i <= 5; i++) {
+              const starIcon = document.createElement("i");
+              starIcon.className = `fa fa-star${i <= comment.score ? "" : "-o"}`;
+  
+              puntuacion.appendChild(starIcon);
+            }
+            cardFooter.appendChild(puntuacion);
+  
+            comentarioCard.appendChild(cardFooter);
+  
+            // Agregar la tarjeta al contenedor de tarjetas
+            ulContenedor.appendChild(comentarioCard);
+          });
+        })
+        .catch((err) => console.log("Solicitud fallida", err));
+    }
   });
   
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //Inicializa un array vacio donde se cargarán los datos recibidos e inicializa una variable
-let productsArray = [];
-let htmlContentToAppend = "";
-
-function setCatID(id) {
-  localStorage.setItem("catID", id);
-  window.location = "product-info.html"
-}
-
-//Función que recibe un array como parametro
-function showProduct(array, i) {
-htmlContentToAppend = ""; // Limpia el contenido anterior antes de rellenar el nuevo
-
-let product = array[i];
-htmlContentToAppend += `
-    <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
-        <div class="row">
-            <div class="col-3">
-                <img src="${product.image}" alt="product image" class="img-thumbnail">
-            </div>
-            <div class="col">
-                <div class="d-flex w-100 justify-content-between">
-                    <div class="mb-1">
-                        <h4>${product.name} - ${product.currency} ${product.cost}</h4>
-                        <p>${product.description}</p>
-                    </div>
-                    <small class="text-muted">${product.soldCount} artículos vendidos</small>
-                </div>
-            </div>
-        </div>
-    </div>
-`;
-
-// Después de generar el código HTML para el elemento seleccionado, establece el contenido del contenedor
-document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
-}
-
-document.addEventListener("DOMContentLoaded", function(e) {
-  getJSONData(autitosURL).then(function(resultObj) {
-      if (resultObj.status === "ok") {
-          productsArray = resultObj.data.products;
-          //showProductsList(productsArray);
-          showProduct(productsArray, 0 );
-      }
-  });
-});
-
-
-
-
-
-
-
