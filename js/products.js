@@ -61,6 +61,13 @@ function showProductsList(array) {
 
 // Evento que se ejecuta cuando la página se ha cargado completamente
 document.addEventListener("DOMContentLoaded", function(e) {
+    const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
+    const usuariovalue = localStorage.getItem('usuariovalue');
+    if (usuariovalue !== null) {
+        enlaceInicioSesion.href = "my-profile.html" 
+        enlaceInicioSesion.textContent = usuariovalue;
+    }
+    
     // Obtén el valor de "catID" del almacenamiento local
     const catID = localStorage.getItem("catID");
 

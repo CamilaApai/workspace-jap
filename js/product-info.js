@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function (e) {
+  const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
+    const usuariovalue = localStorage.getItem('usuariovalue');
+    if (usuariovalue !== null) {
+        enlaceInicioSesion.href = "my-profile.html" 
+        enlaceInicioSesion.textContent = usuariovalue;
+    }
+ 
     // se obtiene el prodID almacenado en el almacenamiento local
     const prodID = localStorage.getItem("ProdID");
   
@@ -38,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   
             const imgElement = document.createElement("img");
             imgElement.src = imageUrl;
-            imgElement.className = "img-fluid"; // Para que las imágenes sean responsivas
+            imgElement.className = "img-fluid"; // Para que las imágenes sean responsive
   
             colDiv.appendChild(imgElement);
             rowDiv.appendChild(colDiv);
@@ -47,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           // Agrega la fila de imágenes al contenedor de imágenes del producto
           contenedorImagenes.appendChild(rowDiv);
   
-          // Después de mostrar la información del producto, obtén y muestra los comentarios
+          // Después de mostrar la información del producto, obtiene y muestra los comentarios
           obtenerYMostrarComentarios(prodID);
         })
         .catch(function (error) {
@@ -55,10 +62,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
     } else {
       // Maneja el caso en el que no haya un prodID en el almacenamiento local.
-      // Puedes mostrar un mensaje de error o redirigir a la página de inicio.
       alert("No funcionó");
-    }
-  
+  } 
+
     function obtenerYMostrarComentarios(prodID) {
       // Realiza una solicitud (fetch) para obtener los comentarios del producto
       const comentariosURL = `https://japceibal.github.io/emercado-api/products_comments/${prodID}.json`;
@@ -66,16 +72,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
       fetch(comentariosURL)
         .then((response) => response.json())
         .then((data) => {
-          // Obtener el elemento contenedor donde se mostrarán las tarjetas de comentarios
+          // Obtiene el elemento contenedor donde se mostrarán las tarjetas de comentarios
           const ulContenedor = document.getElementById("ulContenedor");
   
-          // Iterar a través de la lista de comentarios
+          // Itera a través de la lista de comentarios
           data.forEach((comment) => {
-            // Crear una tarjeta (card) Bootstrap para cada comentario
+            // Crea una tarjeta (card) para cada comentario
             const comentarioCard = document.createElement("div");
             comentarioCard.className = "card mb-3";
   
-            // Crear el encabezado de la tarjeta (nombre de usuario y fecha)
+            // Crea el encabezado de la tarjeta (nombre de usuario y fecha)
             const cardHeader = document.createElement("div");
             cardHeader.className = "card-header";
             // comentarioCard.className = 'card mb-3';
@@ -93,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   
             comentarioCard.appendChild(cardHeader);
   
-            // Crear el cuerpo de la tarjeta (contenido del comentario)
+            // Crea el cuerpo de la tarjeta (contenido del comentario)
             const cardBody = document.createElement("div");
             cardBody.className = "card-body";
   
@@ -105,11 +111,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
   
             comentarioCard.appendChild(cardBody);
   
-            // Crear el pie de la tarjeta (puntuación)
+            // Crea el pie de la tarjeta (puntuación)
             const cardFooter = document.createElement("div");
             cardFooter.className = "card-footer text-muted";
   
-            // Crear estrellas para mostrar la puntuación
+            // Crea estrellas para mostrar la puntuación
             const puntuacion = document.createElement("p");
             puntuacion.innerHTML = "Puntuación: ";
             for (let i = 1; i <= 5; i++) {
@@ -122,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   
             comentarioCard.appendChild(cardFooter);
   
-            // Agregar la tarjeta al contenedor de tarjetas
+            // Agrega la tarjeta al contenedor de tarjetas
             ulContenedor.appendChild(comentarioCard);
           });
         })
