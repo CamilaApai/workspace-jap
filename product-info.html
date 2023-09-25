@@ -31,24 +31,48 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-          </li>
+            <li class="nav-item" id="inicioSesion">
+              <a class="nav-link" href="my-profile.html"></a>
+            </li>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
+  <main class="container">
     <div id="containerInfo" class="container">
+      <h2 class="card-title">Información del Producto</h2>
+      <hr>
+      <h2 id="producto-titulo" class="card-title"></h2>
+      <p><strong>Precio</strong></p>
+      <p id="producto-precio"></p>
+      <p><strong>Descripción</strong></p>
+      <p id="producto-descripcion"></p>
+      <p><strong>Categoría</strong></p>
+      <p id="producto-categoria"></p>
+      <p><strong>Cantidad de vendidos</strong></p>
+      <p id="producto-vendidos"></p>
+      <p><strong>Imágenes Ilustrativas</strong></p>
+    </div>
+
+<div id="product-images" class="product-images">
+
+  <div id="containerInfo" class="container" class="list-group ">
+      
+    <!-- Las imágenes del producto se agregarán aquí -->
+  </div>
+</div>
+    
       <h2 class="card-title">Comentarios</h2>
-      <div class="row" id="ulContenedor">
+    <div class="row" id="ulContenedor">
+      
         <!-- Las tarjetas de comentarios se agregarán aquí -->
       </div>
     </div>
-    <div id="containerInfo" class="container" class="list-group ">
-      
+    
+
      <!-- <div class="card" style="width: 18rem;">  -->
        
-<form>
+<form id="commentForm">
  
   <div class="mb-3">
     <label for="exampleFormControlTextarea1" class="form-label">Danos tu opinión</label>
@@ -90,6 +114,10 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <style>
+
+#product-images {max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;}
+  </style>
 </body>
 
 </html>
