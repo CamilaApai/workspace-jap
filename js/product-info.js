@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             const Titulo = document.createElement('p');
             Titulo.textContent = productoRelacionado.name;
-            Titulo.classList.add('card-header');
+            Titulo.classList.add('tituloRel');
         
             const imagenproductorelacionado = document.createElement('img');
             imagenproductorelacionado.src = productoRelacionado.image;

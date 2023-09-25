@@ -144,6 +144,15 @@ footer p {
 .cursor-active {
   cursor: pointer;
 }
+.tituloRel {
+text-align: center;
+
+}
+#divtituloProductosrelacionados {
+  margin-top: 20px; 
+  margin-right: 20px;
+  font-size: 150%;
+}
 
 .left {
   float: left;
