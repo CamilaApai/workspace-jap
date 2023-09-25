@@ -57,68 +57,46 @@ document.addEventListener("DOMContentLoaded", function (e) {
           // Después de mostrar la información del producto, obtiene y muestra los comentarios
           obtenerYMostrarComentarios(prodID);
 
-           //titulo de los productos relacionados
-           const divtituloProductosrelacionados = document.createElement('div');
-           divtituloProductosrelacionados.id= "iddivtitulorelated";
-           const tituloProductosrelacionados = document.createElement('p');
-           tituloProductosrelacionados.textContent = 'Productos relacionados: '
-           divtituloProductosrelacionados.appendChild(tituloProductosrelacionados)
- 
- //creo un div para la card 1 del primer producto relacionado
- const divcard1 = document.createElement('div');
- divcard1.classList.add('card');
- divcard1.id ="Holadiv1"
- 
-  //creo un div para la card 2 del segundo producto relacionado
- const divcard2 = document.createElement('div');
- divcard2.classList.add('card');
- divcard2.id ="Holadiv2"
- 
-           const relacionados = data.relatedProducts;
-           const divrleated = document.getElementById('aCAVANLOSRELACIONADOS');
- 
- 
-           const Titulo1 = document.createElement('p');
-           //Accedo a relatedProducts de la api en la posicion 1 y al nombre
-           Titulo1.textContent = relacionados[0].name;
-           //le agrego clase tipo card header al titulo
-           Titulo1.classList.add('card-header');
-           //creo imagen 
-           imagenproductorelacionado1 = document.createElement('img')
-           //le digo donde está la source de la foto en la api
-           imagenproductorelacionado1.src = relacionados[0].image;
-           imagenproductorelacionado1.classList.add('card-body');
-           
- 
-           const Titulo2 = document.createElement('p');
-           //Accedo a relatedProducts de la api en la posicion 1 y al nombre
-           Titulo2.textContent = relacionados[1].name;
-           //le agrego clase tipo card header al titulo
-           Titulo2.classList.add('card-header');
-            //creo imagen 
-            imagenproductorelacionado2 = document.createElement('img')
-            //le digo donde está la source de la foto en la api
-            imagenproductorelacionado2.src = relacionados[1].image;
-            imagenproductorelacionado2.classList.add('card-body');
-     
- 
-            divrleated.appendChild(divtituloProductosrelacionados);
- //Pongo la divcard1 dentro del div donde iran las dos cards de los productos relacionados 
-           divrleated.appendChild(divcard1);
- //Pongo la divcard2 dentro del div donde iran las dos cards de los productos relacionados 
-           divrleated.appendChild(divcard2);
- 
- 
-           divcard1.appendChild(Titulo1);
-           divcard2.appendChild(Titulo2);
- 
- divcard1.appendChild(imagenproductorelacionado1);
- divcard2.appendChild(imagenproductorelacionado2);
+           //consigo el objeto relatedProducts del json y lo almaceno en una cte llamada relacionados
+          const relacionados = data.relatedProducts;
+//hago una funcion para conseguir el id del producto relacionado y que me redirija al product-info
+          function ParallevarmeaproductinfoREL(id) {
+            // almaceno el ID del producto relacionado en el localstorage 
+            localStorage.setItem("ProdID", id); 
+            //que me redirija a product-ifno
+            window.location.href = "product-info.html";
+          }
 
+          const divrleated = document.getElementById('aCAVANLOSRELACIONADOS');
+          //hago un for para que recorra el array de productos relacionados (solo tiene dos productos relacionados)
+          for (let i = 0; i < relacionados.length; i++) {
+            //deifno productorelacionado segun el lugar del array 
+            const productoRelacionado = relacionados[i];
 
+            const divcard = document.createElement('div');
+            divcard.classList.add('card');
+            divcard.id = `divcardREL${i}`;
 
+            const Titulo = document.createElement('p');
+            Titulo.textContent = productoRelacionado.name;
+            Titulo.classList.add('card-header');
+        
+            const imagenproductorelacionado = document.createElement('img');
+            imagenproductorelacionado.src = productoRelacionado.image;
+            imagenproductorelacionado.classList.add('card-body');
+        
+            // se agrega el onclick y se le pasa el id del producto como parametro de la funcion parallevarmeaproductinforel
+            divcard.onclick = function () {
+              ParallevarmeaproductinfoREL(productoRelacionado.id);
+            };
+
+            divrleated.appendChild(divcard);
+            divcard.appendChild(Titulo);
+            divcard.appendChild(imagenproductorelacionado);
+          }
 
         })
+        
         .catch(function (error) {
           console.error("Error al obtener los detalles del producto:", error);
         });
