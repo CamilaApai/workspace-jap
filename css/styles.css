@@ -287,3 +287,10 @@ label[for="maxPrice"] {
 button:hover {
   background-color: #ca8c5a;
 }
+
+/*carrousel imágenes*/
+.carousel-item img {
+  max-width: 400px;
+  max-height: 400px;
+  margin: 0 auto;
+}

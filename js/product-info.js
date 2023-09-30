@@ -32,28 +32,28 @@ document.addEventListener("DOMContentLoaded", function (e) {
           ).textContent = `${data.soldCount}`;
   
           // Actualiza las imágenes del producto
-          const contenedorImagenes = document.getElementById("product-images");
+
+const contenedorImagenes = document.querySelector(".carousel-inner");
+
+data.images.forEach(function (imageUrl, index) {
+  // Crea un div con la clase "carousel-item" para cada imagen
+  const carouselItemDiv = document.createElement("div");
+  carouselItemDiv.className = "carousel-item";
+
+  // La primera imagen debe tener la clase "active" para indicar que es la diapositiva inicial
+  if (index === 0) {
+    carouselItemDiv.classList.add("active");
+  }
+
+  const imgElement = document.createElement("img");
+  imgElement.src = imageUrl;
+  imgElement.className = "d-block w-100"; // Para que las imágenes sean responsive
   
-          // Crea un div con la clase "row" para envolver las imágenes
-          const rowDiv = document.createElement("div");
-          rowDiv.className = "row";
-  
-          data.images.forEach(function (imageUrl) {
-            // Crea un div con la clase "col" para cada imagen
-            const colDiv = document.createElement("div");
-            colDiv.className = "col";
-  
-            const imgElement = document.createElement("img");
-            imgElement.src = imageUrl;
-            imgElement.className = "img-fluid"; // Para que las imágenes sean responsive
-  
-            colDiv.appendChild(imgElement);
-            rowDiv.appendChild(colDiv);
-          });
-  
-          // Agrega la fila de imágenes al contenedor de imágenes del producto
-          contenedorImagenes.appendChild(rowDiv);
-  
+  carouselItemDiv.appendChild(imgElement);
+  contenedorImagenes.appendChild(carouselItemDiv);
+});
+
+
           // Después de mostrar la información del producto, obtiene y muestra los comentarios
           obtenerYMostrarComentarios(prodID);
 
