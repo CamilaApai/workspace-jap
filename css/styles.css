@@ -294,3 +294,16 @@ button:hover {
   max-height: 400px;
   margin: 0 auto;
 }
+
+/* Estilos para el modo Noche */
+.noche {
+  color: black;
+  background: #0c091d;
+  background-color: black;
+}
+
+
+
+
+
+

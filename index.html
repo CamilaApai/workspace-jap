@@ -30,7 +30,17 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item" id="inicioSesion">
-            <a class="nav-link" href="my-profile.html"></a>
+            <a class="nav-link dropdown-toggle" href="index.html" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Nombre de Usuario
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <!-- Opciones del menú desplegable -->
+              <a class="dropdown-item" href="cart.html">Mi carrito</a>
+              <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a>
+              <button class="dropdown-item" id="modo-toggle" aria-label="Contraste" role="switch" onclick="toggleLook()">Modo <span id="modo-icon">&#9728;</span></button>
+            </div>
           </li>
         </ul>
       </div>
