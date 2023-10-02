@@ -296,10 +296,21 @@ button:hover {
 }
 
 /* Estilos para el modo Noche */
-.noche {
-  color: black;
-  background: #0c091d;
-  background-color: black;
+body.noche,
+html.noche {
+  color: white !important; 
+  background: #0c091d !important; 
+  background-color: black !important;
+}
+
+.noche .navbar {
+  background-color: #0c091d !important; 
+}
+
+.noche .card,
+.noche .jumbotron {
+  background-color: #0c091d !important; 
+  color: white !important; 
 }
 
 
