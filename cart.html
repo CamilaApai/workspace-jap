@@ -28,9 +28,21 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
+          </li
+            <li class="nav-item" id="inicioSesion">
+              <a class="nav-link dropdown-toggle" href="index.html" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Nombre de Usuario
+              </a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <!-- Opciones del menú desplegable -->
+                <a class="dropdown-item" href="cart.html">Mi carrito</a>
+                <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a>
+                <button class="dropdown-item" id="modo-toggle" aria-label="Contraste" role="switch" onclick="toggleLook()">Modo <span id="modo-icon">&#9728;</span></button>
+              </div>
+            </li>
+         
         </ul>
       </div>
     </div>
@@ -40,7 +52,22 @@
      
       <div class="container mt-5">
         <h1>Carrito de compras</h1>
-        <div id="cart-items" class="mt-4"></div>
+        <div id="cart-items" class="mt-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3"><strong>Nombre</strong></div>
+                <div class="col-md-2"><strong>Costo</strong></div>
+                <div class="col-md-2"><strong>Cantidad</strong></div>
+                <div class="col-md-2"><strong>Subtotal</strong></div>
+                <div class="col-md-3"></div> <!-- Para mantener el espacio para el ícono de eliminar -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+        </div>
     </div>
 
     <div class="container mt-5">
@@ -54,60 +81,50 @@
         <input type="radio" name="uno"> Standard 12 a 15 días (5%) </input>
         <br>
         <br>
-        <div class="mb-3">
-          <h4>Información de Envío</h4>
-          <div class="mb-3">
-            <label for="nombre" class="form-label">Calle</label>
-            <input type="t
-            ext" class="form-control size="sm" id="nombre" required>
-          </div>
-          <div class="mb-3">
-            <label for="direccion" class="form-label">Número</label>
-            <input type="text" class="form-control" id="direccion" required>
-          </div>
-          <div class="mb-3">
-            <label for="ciudad" class="form-label">Esquina</label>
-            <input type="text" class="form-control" id="ciudad" required>
-          </div>
-        </div>
+        
+<div class="mb-3">
+  <h4>Información de Envío</h4>
+  <div class="mb-3 row">
+      <div class="col-md-4">
+          <label for="nombre" class="form-label">Calle</label>
+          <input type="text" class="form-control" id="nombre" required>
+      </div>
+      <div class="col-md-4">
+          <label for="direccion" class="form-label">Número</label>
+          <input type="text" class="form-control" id="direccion" required>
+      </div>
+      <div class="col-md-4">
+          <label for="ciudad" class="form-label">Esquina</label>
+          <input type="text" class="form-control" id="ciudad" required>
+      </div>
+  </div>
+</div>
+
+<!-- Información de pago -->
+<div class="mb-3">
+  <h4>Información de Pago</h4>
+  <div class="mb-3 row">
+      <div class="col-md-4">
+          <label for="nombre-tarjeta" class="form-label">Nombre en la Tarjeta</label>
+          <input type="text" class="form-control" id="nombre-tarjeta" required>
+      </div>
+      <div class="col-md-4">
+          <label for="numero-tarjeta" class="form-label">Número de Tarjeta</label>
+          <input type="text" class="form-control" id="numero-tarjeta" required>
+      </div>
+      <div class="col-md-2">
+          <label for="fecha-expiracion" class="form-label">Fecha de Expiración</label>
+          <input type="text" class="form-control" id="fecha-expiracion" placeholder="MM/AA" required>
+      </div>
+      <div class="col-md-2">
+          <label for="cvv" class="form-label">CVV</label>
+          <input type="text" class="form-control" id="cvv" required>
+      </div>
+  </div>
+</div>
+
   
-        <!-- Información de pago -->
-        <div class="mb-3">
-          <h4>Información de Pago</h4>
-          <div class="mb-3">
-            <label for="nombre-tarjeta" class="form-label">Nombre en la Tarjeta</label>
-            <input type="text" class="form-control" id="nombre-tarjeta" required>
-          </div>
-          <div class="mb-3">
-            <label for="numero-tarjeta" class="form-label">Número de Tarjeta</label>
-            <input type="text" class="form-control" id="numero-tarjeta" required>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="fecha-expiracion" class="form-label">Fecha de Expiración</label>
-              <input type="text" class="form-control" id="fecha-expiracion" placeholder="MM/AA" required>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cvv" required>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Resumen del pedido -->
-        <div class="mb-3">
-          <h4>Resumen del Pedido</h4>
-          <!-- Aquí puedes mostrar los detalles de los productos en el carrito -->
-          <p>Producto 1: $100.00</p>
-          <p>Producto 2: $50.00</p>
-          <!-- Calcula y muestra el subtotal -->
-          <p>Subtotal: $150.00</p>
-          <!-- Calcula y muestra los gastos de envío -->
-          <p>Gastos de Envío: $10.00</p>
-          <!-- Calcula y muestra el total -->
-          <h5>Total: $160.00</h5>
-        </div>
-  
+    
         <!-- Botón de envío -->
         <button type="submit" class="btn btn-warning">Realizar Pedido</button>
       </form>
