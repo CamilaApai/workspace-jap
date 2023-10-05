@@ -8,13 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const userDropdownLink = document.getElementById("userDropdown");
         userDropdownLink.textContent = userName;
     } else {
-        // En caso de que no se haya recuperado un nombre de usuario válido, puedes realizar alguna acción de manejo de errores o establecer un valor predeterminado
+        // En caso de que no se haya recuperado un nombre de usuario válido
         console.error("Nombre de usuario no encontrado en el localStorage");
-        // Puedes establecer un valor predeterminado si es necesario
-        // userDropdownLink.textContent = "Invitado";
-    }
-});
-
+        
+    }});
 
 const cartURL = `https://japceibal.github.io/emercado-api/user_cart/25801.json`;
 

@@ -300,7 +300,7 @@ body.noche,
 html.noche {
   color: white !important; 
   background: #0c091d !important; 
-  background-color: black !important;
+  background-color: rgb(31, 29, 29) !important;
 }
 
 .noche .navbar {
