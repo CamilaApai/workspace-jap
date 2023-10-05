@@ -1,3 +1,21 @@
+document.addEventListener("DOMContentLoaded", function () {
+    // Recupera el nombre de usuario del localStorage
+    const userName = localStorage.getItem('usuariovalue');
+
+    // Verifica si el nombre de usuario se recuperó correctamente y no es nulo
+    if (userName) {
+        // Asigna el nombre de usuario al contenido del enlace de usuario
+        const userDropdownLink = document.getElementById("userDropdown");
+        userDropdownLink.textContent = userName;
+    } else {
+        // En caso de que no se haya recuperado un nombre de usuario válido, puedes realizar alguna acción de manejo de errores o establecer un valor predeterminado
+        console.error("Nombre de usuario no encontrado en el localStorage");
+        // Puedes establecer un valor predeterminado si es necesario
+        // userDropdownLink.textContent = "Invitado";
+    }
+});
+
+
 const cartURL = `https://japceibal.github.io/emercado-api/user_cart/25801.json`;
 
 fetch(cartURL)
@@ -36,83 +54,13 @@ fetch(cartURL)
         });
         
 
-        let usuarioInicioSesion = localStorage.getItem("usuarioInicioSesion");
-    
-        if (!usuarioInicioSesion) {
-            window.location.href = "login.html"; 
-        }
-    
-       
-        const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
-        const usuariovalue = localStorage.getItem('usuariovalue');
-        if (usuariovalue !== null) {
-            enlaceInicioSesion.href = "my-profile.html" 
-            enlaceInicioSesion.textContent = usuariovalue;
-        }
-    
-    });
-    
-    
-    // Agrega un evento de click para cerrar sesión.
-    const cerrarSesionLink = document.getElementById("cerrarSesion");
-    cerrarSesionLink.addEventListener("click", function(event) {
-        // Evita que el evento predeterminado del clic se produzca.
-        event.preventDefault();
-    
-        // Elimina la información de autenticación del localStorage.
-        localStorage.removeItem("usuarioInicioSesion");
-        localStorage.removeItem("usuariovalue");
-    
-        // Redirecciona a la página de inicio de sesión (login.html).
-        window.location.href = "login.html";
-
-        const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
-        const usuariovalue = localStorage.getItem('usuariovalue');
-        if (usuariovalue !== null) {
-            enlaceInicioSesion.href = "my-profile.html" 
-            enlaceInicioSesion.textContent = usuariovalue;
-        }
-// Agrega un evento de click para cerrar sesión.
-const cerrarSesionLink = document.getElementById("cerrarSesion");
-cerrarSesionLink.addEventListener("click", function(event) {
-    // Evita que el evento predeterminado del clic se produzca.
-    event.preventDefault();
-
-    // Elimina la información de autenticación del localStorage.
-    localStorage.removeItem("usuarioInicioSesion");
-    localStorage.removeItem("usuariovalue");
-
-    // Redirecciona a la página de inicio de sesión (login.html).
-    window.location.href = "login.html";
-});
-
-
-// Función de modo día/noche
-  document.addEventListener("DOMContentLoaded", function() {
-    const body = document.body;
-  
-    // Obtiene el estado actual del modo día/noche usando localStorage
-    const currentMode = localStorage.getItem('mode') || 'light';
-  
-    // Aplica el estado almacenado
-    if (currentMode === 'dark') {
-      body.classList.add("noche");
-    }
-  
-    // Evento para cambiar entre día y noche 
-    const modoToggle = document.getElementById('modo-toggle');
-    modoToggle.addEventListener('click', function() {
-      body.classList.toggle('noche');
-  
-      // Actualiza el estado en el localStorage
-      localStorage.setItem('mode', currentMode === 'light' ? 'dark' : 'light');
-    });
-  });
-
-
+        
     })
 
 
     .catch((error) => {
         console.error("Error al cargar el carrito:", error);
     });
+
+
+    
