@@ -351,16 +351,8 @@ body.noche #inicioSesion a {
 }
 
 
-
-#comprarButton {
-  background-color: rgb(72, 209, 72);
-  border-radius: 10px;
-  color: white;
-  border-color: green;
-  padding: 6px;
-  font-size: 80%;
-  float: right; /* Alinea el botón a la derecha */
+.bg-body-tertiary {
+  background-color: white !important;
 }
-
 
 
