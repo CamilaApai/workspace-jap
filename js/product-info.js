@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   agregarAlCarrito(productoActual);
 
                   // Redirige al usuario de vuelta al catálogo
-                  window.location.href = "index.html";
+                  window.location.href = "products.html";
+
+                  alert("Producto agregado al carrito");
               };
 
               document.getElementById("producto-titulo").appendChild(comprarButton);
