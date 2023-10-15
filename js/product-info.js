@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function (e) {
+
     const enlaceInicioSesion = document.getElementById('inicioSesion').querySelector('a');
     const usuariovalue = localStorage.getItem('usuariovalue');
   
@@ -185,3 +186,4 @@ document.addEventListener("DOMContentLoaded", function (e) {
         localStorage.setItem("CARRITO", JSON.stringify(carrito));
     }
   });
+
