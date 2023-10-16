@@ -326,33 +326,43 @@ html.noche {
 /* Cambiar el color de las letras a naranja */
 .navbar a {
   color: #FFA500 !important;
-  font-family: 'Montserrat', sans-serif; /* Cambiar 'Nombre-de-Fuente' al tipo de fuente deseado */
-  font-weight: bold; /* Opcional: establece un peso de fuente personalizado */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: bold; 
 }
 
 /* Cambiar el color de las letras del nombre de usuario */
 #inicioSesion a {
   color: #FFA500 !important;
-  font-family: 'Montserrat', sans-serif; /* Cambiar 'Nombre-de-Fuente' al tipo de fuente deseado */
-  font-weight: bold; /* Opcional: establece un peso de fuente personalizado */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: bold; 
 }
 /* Cambiar el color de las letras a violeta en modo noche */
 body.noche .navbar a {
   color: #f5f5f5 !important;
-  font-family: 'Montserrat', sans-serif; /* Cambiar 'Otro-Nombre-de-Fuente' al tipo de fuente deseado para el modo noche */
-  font-weight: bold; /* Opcional: establece un peso de fuente personalizado para el modo noche */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold; 
 }
 
-/* Cambiar el color de las letras del nombre de usuario a violeta en modo noche */
+
 body.noche #inicioSesion a {
   color: #5a5959 !important;
-  font-family: 'Montserrat', sans-serif; /* Cambiar 'Otro-Nombre-de-Fuente' al tipo de fuente deseado para el modo noche */
-  font-weight: bold; /* Opcional: establece un peso de fuente personalizado para el modo noche */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: bold; 
 }
 
 
 .bg-body-tertiary {
   background-color: white !important;
 }
+
+/* Cambiar el color de las líneas del ícono del navbar-toggler a gris */
+.navbar-toggler-icon::before {
+  background-color: gray !important;
+}
+
+
+
+
+
 
 
