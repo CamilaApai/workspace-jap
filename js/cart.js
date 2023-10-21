@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Obtener el elemento del producto almacenado en el localStorage
                 const productDiv = document.createElement("div");
                 productDiv.classList.add("card", "mb-3");
+                if (producto.currency === "UYU") {
+
+                    costdolares = producto.cost * 0.025;
+                    producto.currency = "USD";
+                    
+                }
 
                 productDiv.innerHTML = `
                 <div class="card-body">
@@ -90,13 +96,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             <h5>${producto.name}</h5>
                         </div>
                         <div class="col-md-2">
-                            <h5>${producto.currency} ${producto.cost}</h5>
+                            <h5>${producto.currency} ${costdolares.toFixed(2)}</h5>
                         </div>
                         <div class="col-md-2">
                             <input type="number" class="form-control" value="${producto.count}" min="1" data-product-id="${producto.id}">
                         </div>
                         <div class="col-md-2 subtotal">
-                            <h5>Subtotal: ${producto.currency} ${producto.cost * producto.count}</h5>
+                            <h5>Subtotal: ${producto.currency} ${costdolares.toFixed(2) * producto.count}</h5>
                         </div>
                         <div class="col-md-2">
                             <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
@@ -111,10 +117,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cantitdadinput = productDiv.querySelector('input');
                 cantitdadinput.addEventListener('input', function () {
                     const count = parseInt(cantitdadinput.value);
-                    const cost = parseFloat(producto.cost); // Corrección aquí
+                    const cost = parseFloat(costdolares); 
                     const subtotal = count * cost;
                     const subtotalElement = productDiv.querySelector('.subtotal');
-                    subtotalElement.innerHTML = `<h5>Subtotal: ${producto.currency} ${subtotal.toFixed(2)}`; // Corrección aquí
+                    subtotalElement.innerHTML = `<h5>Subtotal: ${producto.currency} ${subtotal.toFixed(2)}`; 
 
                     // Actualizar el carrito en el localStorage con la nueva cantidad
                     const carrito = JSON.parse(localStorage.getItem("CARRITO")) || [];
@@ -225,9 +231,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalPagar = totalSubtotal + costoenvio;
 
         const containersubtotal = document.getElementById("subtotal-container");
-        containersubtotal.querySelector("#subtotal").classList.add("text-success"); // Ejemplo de clase de texto de color verde en Bootstrap
-        containersubtotal.querySelector("#costo-envio").classList.add("text-success"); // Ejemplo de clase de texto de color azul en Bootstrap
-        containersubtotal.querySelector("#total-pagar").classList.add("text-success"); // Ejemplo de clase de texto de color rojo en Bootstrap
+        containersubtotal.querySelector("#subtotal").classList.add("text-success"); 
+        containersubtotal.querySelector("#costo-envio").classList.add("text-success");
+        containersubtotal.querySelector("#total-pagar").classList.add("text-success"); 
         
         
         // Actualizar el contenido de los elementos con clases
