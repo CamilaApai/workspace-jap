@@ -154,18 +154,19 @@ document.addEventListener("DOMContentLoaded", function () {
             CARRITO.forEach((producto) => {
                 MostrarProductoEnCarrito(producto);
             });
-
-           // Recuperar el botón "Realizar Pedido"
+///PARTE 1 ENTREGA 6////
+           //busca por id el boton y lo guarda en realizarpedidobutton
     const realizarPedidoButton = document.getElementById("realizar-pedido");
 
     // Agregar un evento click al botón "Realizar Pedido" para calcular los subtotales
     realizarPedidoButton.addEventListener("click", function (e) {
         e.preventDefault(); // Evita el envío del formulario por defecto
-        calcularSubtotales();
+        calcularSubtotales(); //llama a la funcion calcularsubtotales
     
     });
 
     // Agregar evento input para calcular el subtotal en función de la cantidad del producto
+    //selecciona todo los input 
     const cantidadInputs = document.querySelectorAll('input[data-product-id]');
     cantidadInputs.forEach(function (cantitdadinput) {
         cantitdadinput.addEventListener('input', function () {
@@ -193,6 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cartItems.forEach((productDiv) => {
             const cantitdadinput = productDiv.querySelector('input');
             const count = parseInt(cantitdadinput.value);
+
             const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
 
             if (!isNaN(count) && !isNaN(unitCost)) {
@@ -218,13 +220,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const costoenvio = calcularCostoEnvio();
 
         cartItems.forEach((productDiv) => {
+            //selecciona el primer input de todos los elementos con clase card (ese input es el de cantidad)
             const cantitdadinput = productDiv.querySelector('input');
+            //el value de cantidad input el cual es la cantidad, la almacena dentor de count, y usa parseint para redondear hacia abajo y que no permita decimale (ejemplo 1.5 peugeot)  
             const count = parseInt(cantitdadinput.value);
+//seleccoina al elemento que tenga la clase .col-md-2 y sea h5 (el subtotal: usd $precio), y crea un array con el split separando asi ["usd","costdolares.toFixed(2) * producto.count"] y en ese array accede al precio o sea al costdolares.toFixed(2) * producto.count y lo muestra como contenido luego se convierte en un número de punto flotante utilizando parseFloat.
             const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
-
+//i hay un valor tanto en count como en unitcost (o sea que no son NaN) calcula el subtotal y a totalubtotal se le va sumando 
             if (!isNaN(count) && !isNaN(unitCost)) {
                 const subtotal = count * unitCost;
                 totalSubtotal += subtotal;
+                
             }
         });
 
