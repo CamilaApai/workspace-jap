@@ -159,6 +159,23 @@ document.addEventListener("DOMContentLoaded", function () {
     
     });
 
+    // Agregar evento input para calcular el subtotal en función de la cantidad del producto
+    const cantidadInputs = document.querySelectorAll('input[data-product-id]');
+    cantidadInputs.forEach(function (cantitdadinput) {
+        cantitdadinput.addEventListener('input', function () {
+            calcularSubtotales(); // Recalcular al cambiar la cantidad
+        });
+    });
+
+    // Agregar eventos para actualizar el costo de envío al cambiar el método de envío
+    const metodoInputsEnvio = document.querySelectorAll('input[name="metodo-envio"]');
+    metodoInputsEnvio.forEach(function (input) {
+        input.addEventListener("change", function () {
+            calcularSubtotales(); // Recalcular al cambiar el método de envío
+        });
+    });
+
+
     // Función para calcular el costo de envío
     function calcularCostoEnvio() {
         const premium = document.getElementById('premium');
@@ -188,8 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
         alert('debes agregar un método de pago'); // Si no se selecciona ningún método de envío
     }
 
-    // Función para calcular los subtotales
-    function calcularSubtotales() {
+     // Función para calcular los subtotales
+     function calcularSubtotales() {
         const cartItems = document.querySelectorAll(".card");
         let totalSubtotal = 0;
         const costoenvio = calcularCostoEnvio();
@@ -208,31 +225,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const totalPagar = totalSubtotal + costoenvio;
 
         const containersubtotal = document.getElementById("subtotal-container");
-        // Acceder al elemento contenedor de los subtotales
-
-
-
-
-containersubtotal.querySelector("#subtotal").classList.add("text-success"); // Ejemplo de clase de texto de color verde en Bootstrap
-containersubtotal.querySelector("#costo-envio").classList.add("text-success"); // Ejemplo de clase de texto de color azul en Bootstrap
-containersubtotal.querySelector("#total-pagar").classList.add("text-success"); // Ejemplo de clase de texto de color rojo en Bootstrap
-
-
-// Actualizar el contenido de los elementos con clases
-containersubtotal.querySelector("#costos").textContent = `Costos`;
-containersubtotal.querySelector("#subtotal").textContent = `Subtotal: $${totalSubtotal.toFixed(2)}`;
-containersubtotal.querySelector("#costo-envio").textContent = `Costo de envío: $${costoenvio.toFixed(2)}`;
-containersubtotal.querySelector("#total-pagar").textContent = `Total a pagar: $${totalPagar.toFixed(2)}`;
-
+        containersubtotal.querySelector("#subtotal").classList.add("text-success"); // Ejemplo de clase de texto de color verde en Bootstrap
+        containersubtotal.querySelector("#costo-envio").classList.add("text-success"); // Ejemplo de clase de texto de color azul en Bootstrap
+        containersubtotal.querySelector("#total-pagar").classList.add("text-success"); // Ejemplo de clase de texto de color rojo en Bootstrap
+        
+        
+        // Actualizar el contenido de los elementos con clases
+        containersubtotal.querySelector("#costos").textContent = `Costos`;
+        containersubtotal.querySelector("#subtotal").textContent = `Subtotal: $${totalSubtotal.toFixed(2)}`;
+        containersubtotal.querySelector("#costo-envio").textContent = `Costo de envío: $${costoenvio.toFixed(2)}`;
+        containersubtotal.querySelector("#total-pagar").textContent = `Total a pagar: $${totalPagar.toFixed(2)}`;
     }
-
-    // Agregar un evento para actualizar el costo de envío cuando se cambie la selección del método de envío
-    const metodoinputsenvio = document.querySelectorAll('input[name="metodo-envio"]');
-    metodoinputsenvio.forEach(function (input) {
-        input.addEventListener("change", function () {
-            calcularSubtotales(); // Recalcular todo cuando cambia el método de envío
-    
-});
-});
 });
 });
