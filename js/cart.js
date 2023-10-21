@@ -73,7 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Remover el elemento del DOM
                     productDiv.remove();
+                    calcularSubtotales();
                 });
+
             });
 
             // Función para mostrar productos en el carrito almacenados en el localStorage
@@ -154,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
             CARRITO.forEach((producto) => {
                 MostrarProductoEnCarrito(producto);
             });
-///PARTE 1 ENTREGA 6////
+///PARTE 1 ENTREGA 6
            //busca por id el boton y lo guarda en realizarpedidobutton
     const realizarPedidoButton = document.getElementById("realizar-pedido");
 
