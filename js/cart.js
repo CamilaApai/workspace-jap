@@ -251,7 +251,81 @@ document.addEventListener("DOMContentLoaded", function () {
                 containersubtotal.querySelector("#total-pagar").textContent = `Total a pagar: $${totalPagar.toFixed(2)}`;
             }
         });
-});
+
+        // Agregar evento al botón "Realizar Pedido"
+        const realizarPedidoButton = document.getElementById("realizar-pedido");
+        realizarPedidoButton.addEventListener("click", function (e) {
+            e.preventDefault(); 
+
+        // Realizar las validaciones
+        const nombreInput = document.getElementById("nombre");
+        const direccionInput = document.getElementById("direccion");
+        const ciudadInput = document.getElementById("ciudad");
+        const metodoEnvioInputs = document.querySelectorAll('input[name="metodo-envio"]');
+        const cantidadInputs = document.querySelectorAll('input[data-product-id]');
+
+        // Validación de campos calle, número y esquina
+        if (nombreInput.value.trim() === "" || direccionInput.value.trim() === "" || ciudadInput.value.trim() === "") {
+            alert("Los campos calle, número y esquina no pueden estar vacíos.");
+            return;
+        }
+
+        // Validación de forma de envío
+        let metodoEnvioSeleccionado = false;
+        metodoEnvioInputs.forEach((input) => {
+            if (input.checked) {
+                metodoEnvioSeleccionado = true;
+            }
+        });
+        if (!metodoEnvioSeleccionado) {
+            alert("Debes seleccionar una forma de envío.");
+            return;
+        }
+
+        // Validación de cantidad para cada artículo
+        cantidadInputs.forEach((input) => {
+            const count = parseInt(input.value);
+            if (isNaN(count) || count <= 0 ) {
+                alert("La cantidad para cada artículo debe estar definida y ser mayor a 0.");
+                return;
+            }
+        });
+        
+        // Validación de carrito con productos.
+        const cartItems = document.querySelectorAll(".card");
+        if (cartItems.length === 0) {
+            alert("No puedes realizar el pago porque no hay productos en el carrito.");
+            return;
+        }
+
+        // Realizar el pago
+        const tipoPago = document.getElementById("tipoPago").value;
+        const numTarjeta = document.getElementById("numTarjeta").value;
+        const codigoSeg = document.getElementById("codigoSeg").value;
+        const vencimiento = document.getElementById("vencimiento").value;
+        const numCuenta = document.getElementById("numCuenta").value;
+
+        if (tipoPago === "tarjetaCredito") {
+            if (numTarjeta.trim() === "" || codigoSeg.trim() === "" || vencimiento.trim() === "") {
+                alert("Debes ingresar todos los detalles de la tarjeta de crédito.");
+                return;
+            }
+
+        } else if (tipoPago === "transferencia") {
+            if (numCuenta.trim() === "") {
+                alert("Debes ingresar el número de cuenta para la transferencia bancaria.");
+                return;
+            }
+        }
+
+        alert("¡Has comprado con éxito!");
+
+        calcularSubtotales();
+    });
+
+        calcularSubtotales();
+    });
+
 
 // Función para cambiar la forma de pago
 function cambiarFormaPago() {
@@ -274,18 +348,5 @@ function cambiarFormaPago() {
     }
 }
 
-// Función para realizar el pago
-function realizarPago() {
-    const tipoPago = document.getElementById("tipoPago").value;
-    const numTarjeta = document.getElementById("numTarjeta").value;
-    const codigoSeg = document.getElementById("codigoSeg").value;
-    const vencimiento = document.getElementById("vencimiento").value;
-    const numCuenta = document.getElementById("numCuenta").value;
 
-    // Aquí puedes realizar las operaciones necesarias con los datos ingresados en el modal de pago
-    // ...
 
-    // Cerrar el modal después de realizar el pago
-    const modalPago = new bootstrap.Modal(document.getElementById('modalPago'));
-    modalPago.hide();
-}
