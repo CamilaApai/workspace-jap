@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>eMercado - Todo lo que busques está aquí</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;1,100&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;1,100&family=Playfair+Display:ital@0;1&display=swap"
+        rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-1">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img id="logoImage" src="logo-day.png" alt="Logo" width="170" height="70" class="d-inline-block align-text-top">
+                <img id="logoImage" src="logo-day.png" alt="Logo" width="170" height="70"
+                    class="d-inline-block align-text-top">
             </a>
         </div>
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,7 +48,8 @@
                         <a class="nav-link" href="sell.html">Vender</a>
                     </li>
                     <li class="nav-item" id="inicioSesion">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             Nombre de Usuario
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -48,7 +58,8 @@
                             <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="login.html" id="cerrarSesion">Cerrar sesión</a>
-                            <button class="dropdown-item" id="modo-toggle" aria-label="Contraste" role="switch" onclick="toggleLook()">Modo <span id="modo-icon">&#9728;</span></button>
+                            <button class="dropdown-item" id="modo-toggle" aria-label="Contraste" role="switch"
+                                onclick="toggleLook()">Modo <span id="modo-icon">&#9728;</span></button>
                         </div>
                     </li>
                 </ul>
@@ -66,9 +77,12 @@
             <h2 class="mb-4">Checkout</h2>
             <form id="checkout-form">
                 <p>Tipo de envío</p>
-                <input type="radio" name="metodo-envio" id="premium" value="15" data-descuento="0.15"> Premium 2 a 5 días (15%) <br>
-                <input type="radio" name="metodo-envio" id="express" value="7" data-descuento="0.07"> Express 5 a 8 días (7%) <br>
-                <input type="radio" name="metodo-envio" id="standard" value="5" data-descuento="0.05"> Standard 12 a 15 días (5%) <br><br>
+                <input type="radio" name="metodo-envio" id="premium" value="15" data-descuento="0.15"> Premium 2 a 5
+                días (15%) <br>
+                <input type="radio" name="metodo-envio" id="express" value="7" data-descuento="0.07"> Express 5 a 8 días
+                (7%) <br>
+                <input type="radio" name="metodo-envio" id="standard" value="5" data-descuento="0.05"> Standard 12 a 15
+                días (5%) <br><br>
 
                 <div class="mb-3">
                     <h4>Información de Envío</h4>
@@ -88,29 +102,7 @@
                     </div>
                 </div>
 
-                <!-- Información de pago -->
-
-                <div class="mb-3">
-                    <h4>Información de Pago</h4>
-                    <div class="mb-3 row">
-                        <div class="col-md-4">
-                            <label for="nombre-tarjeta" class="form-label">Nombre en la Tarjeta</label>
-                            <input type="text" class="form-control" id="nombre-tarjeta" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="numero-tarjeta" class="form-label">Número de Tarjeta</label>
-                            <input type="text" class="form-control" id="numero-tarjeta" required>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="fecha-expiracion" class="form-label">Fecha de Expiración</label>
-                            <input type="text" class="form-control" id="fecha-expiracion" placeholder="MM/AA" required>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cvv" required>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div class="mb-3" id="subtotal-container">
                     <h5 id="costos"></h5>
@@ -118,6 +110,59 @@
                     <p id="costo-envio"></p>
                     <p id="total-pagar"></p>
                 </div>
+
+                <!-- Botón para abrir el modal -->
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalPago">
+                    Seleccionar Forma de Pago
+                </button>
+
+                <!-- Modal para seleccionar forma de pago -->
+                <div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="modalPagoLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalPagoLabel">Forma de Pago</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="tipoPago" class="form-label">Seleccione la forma de pago:</label>
+                                    <select class="form-select" id="tipoPago" onchange="cambiarFormaPago()">
+                                        <option value="tarjetaCredito" selected>Tarjeta de Crédito</option>
+                                        <option value="transferencia">Transferencia Bancaria</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numTarjeta" class="form-label">Número de Tarjeta:</label>
+                                    <input type="text" class="form-control" id="numTarjeta"
+                                        placeholder="Ingrese el número de tarjeta">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="codigoSeg" class="form-label">Código de Seguridad:</label>
+                                    <input type="text" class="form-control" id="codigoSeg"
+                                        placeholder="Ingrese el código de seguridad">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="vencimiento" class="form-label">Fecha de Vencimiento:</label>
+                                    <input type="text" class="form-control" id="vencimiento" placeholder="MM/AA">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numCuenta" class="form-label">Número de Cuenta:</label>
+                                    <input type="text" class="form-control" id="numCuenta"
+                                        placeholder="Ingrese el número de cuenta" disabled>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" onclick="realizarPago()">Realizar
+                                    Pago</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- Botón de envío -->
                 <button type="submit" class="btn btn-warning" id="realizar-pedido">Realizar Pedido</button>
@@ -133,7 +178,8 @@
             <p class="float-end">
                 <a href="#">Volver arriba</a>
             </p>
-            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a
+                    Programar</a></p>
         </div>
     </footer>
     <div id="spinner-wrapper">
@@ -150,4 +196,5 @@
     <script src="js/login.js"></script>
     <script src="js/cart.js"></script>
 </body>
+
 </html>
