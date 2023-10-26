@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     costdolares = producto.cost * 0.025;
                     producto.currency = "USD";
-                    
+
                 }
 
                 productDiv.innerHTML = `
@@ -119,10 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cantitdadinput = productDiv.querySelector('input');
                 cantitdadinput.addEventListener('input', function () {
                     const count = parseInt(cantitdadinput.value);
-                    const cost = parseFloat(costdolares); 
+                    const cost = parseFloat(costdolares);
                     const subtotal = count * cost;
                     const subtotalElement = productDiv.querySelector('.subtotal');
-                    subtotalElement.innerHTML = `<h5>Subtotal: ${producto.currency} ${subtotal.toFixed(2)}`; 
+                    subtotalElement.innerHTML = `<h5>Subtotal: ${producto.currency} ${subtotal.toFixed(2)}`;
 
                     // Actualizar el carrito en el localStorage con la nueva cantidad
                     const carrito = JSON.parse(localStorage.getItem("CARRITO")) || [];
@@ -156,99 +156,136 @@ document.addEventListener("DOMContentLoaded", function () {
             CARRITO.forEach((producto) => {
                 MostrarProductoEnCarrito(producto);
             });
-///PARTE 1 ENTREGA 6
-           //busca por id el boton y lo guarda en realizarpedidobutton
-    const realizarPedidoButton = document.getElementById("realizar-pedido");
+            ///PARTE 1 ENTREGA 6
+            //busca por id el boton y lo guarda en realizarpedidobutton
+            const realizarPedidoButton = document.getElementById("realizar-pedido");
 
-    // Agregar un evento click al botón "Realizar Pedido" para calcular los subtotales
-    realizarPedidoButton.addEventListener("click", function (e) {
-        e.preventDefault(); // Evita el envío del formulario por defecto
-        calcularSubtotales(); //llama a la funcion calcularsubtotales
-    
-    });
+            // Agregar un evento click al botón "Realizar Pedido" para calcular los subtotales
+            realizarPedidoButton.addEventListener("click", function (e) {
+                e.preventDefault(); // Evita el envío del formulario por defecto
+                calcularSubtotales(); //llama a la funcion calcularsubtotales
 
-    // Agregar evento input para calcular el subtotal en función de la cantidad del producto
-    //selecciona todo los input 
-    const cantidadInputs = document.querySelectorAll('input[data-product-id]');
-    cantidadInputs.forEach(function (cantitdadinput) {
-        cantitdadinput.addEventListener('input', function () {
-            calcularSubtotales(); // Recalcular al cambiar la cantidad
-        });
-    });
+            });
 
-    // Agregar eventos para actualizar el costo de envío al cambiar el método de envío
-    const metodoInputsEnvio = document.querySelectorAll('input[name="metodo-envio"]');
-    metodoInputsEnvio.forEach(function (input) {
-        input.addEventListener("change", function () {
-            calcularSubtotales(); // Recalcular al cambiar el método de envío
-        });
-    });
+            // Agregar evento input para calcular el subtotal en función de la cantidad del producto
+            //selecciona todo los input 
+            const cantidadInputs = document.querySelectorAll('input[data-product-id]');
+            cantidadInputs.forEach(function (cantitdadinput) {
+                cantitdadinput.addEventListener('input', function () {
+                    calcularSubtotales(); // Recalcular al cambiar la cantidad
+                });
+            });
+
+            // Agregar eventos para actualizar el costo de envío al cambiar el método de envío
+            const metodoInputsEnvio = document.querySelectorAll('input[name="metodo-envio"]');
+            metodoInputsEnvio.forEach(function (input) {
+                input.addEventListener("change", function () {
+                    calcularSubtotales(); // Recalcular al cambiar el método de envío
+                });
+            });
 
 
-    // Función para calcular el costo de envío
-    function calcularCostoEnvio() {
-        const premium = document.getElementById('premium');
-        const express = document.getElementById('express');
-        const standard = document.getElementById('standard');
-        const cartItems = document.querySelectorAll(".card");
-        let totalSubtotal = 0;
+            // Función para calcular el costo de envío
+            function calcularCostoEnvio() {
+                const premium = document.getElementById('premium');
+                const express = document.getElementById('express');
+                const standard = document.getElementById('standard');
+                const cartItems = document.querySelectorAll(".card");
+                let totalSubtotal = 0;
 
-        cartItems.forEach((productDiv) => {
-            const cantitdadinput = productDiv.querySelector('input');
-            const count = parseInt(cantitdadinput.value);
+                cartItems.forEach((productDiv) => {
+                    const cantitdadinput = productDiv.querySelector('input');
+                    const count = parseInt(cantitdadinput.value);
 
-            const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
+                    const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
 
-            if (!isNaN(count) && !isNaN(unitCost)) {
-                const subtotal = count * unitCost;
-                totalSubtotal += subtotal;
+                    if (!isNaN(count) && !isNaN(unitCost)) {
+                        const subtotal = count * unitCost;
+                        totalSubtotal += subtotal;
+                    }
+                });
+
+                if (premium.checked) {
+                    return totalSubtotal * 0.15;
+                } else if (express.checked) {
+                    return totalSubtotal * 0.07;
+                } else if (standard.checked) {
+                    return totalSubtotal * 0.05;
+                }
+                alert('debes agregar un método de pago'); // Si no se selecciona ningún método de envío
+            }
+
+            // Función para calcular los subtotales
+            function calcularSubtotales() {
+                const cartItems = document.querySelectorAll(".card");
+                let totalSubtotal = 0;
+                const costoenvio = calcularCostoEnvio();
+
+                cartItems.forEach((productDiv) => {
+                    //selecciona el primer input de todos los elementos con clase card (ese input es el de cantidad)
+                    const cantitdadinput = productDiv.querySelector('input');
+                    //el value de cantidad input el cual es la cantidad, la almacena dentor de count, y usa parseint para redondear hacia abajo y que no permita decimale (ejemplo 1.5 peugeot)  
+                    const count = parseInt(cantitdadinput.value);
+                    //seleccoina al elemento que tenga la clase .col-md-2 y sea h5 (el subtotal: usd $precio), y crea un array con el split separando asi ["usd","costdolares.toFixed(2) * producto.count"] y en ese array accede al precio o sea al costdolares.toFixed(2) * producto.count y lo muestra como contenido luego se convierte en un número de punto flotante utilizando parseFloat.
+                    const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
+                    //i hay un valor tanto en count como en unitcost (o sea que no son NaN) calcula el subtotal y a totalubtotal se le va sumando 
+                    if (!isNaN(count) && !isNaN(unitCost)) {
+                        const subtotal = count * unitCost;
+                        totalSubtotal += subtotal;
+
+                    }
+                });
+
+                const totalPagar = totalSubtotal + costoenvio;
+
+                const containersubtotal = document.getElementById("subtotal-container");
+                containersubtotal.querySelector("#subtotal").classList.add("text-success");
+                containersubtotal.querySelector("#costo-envio").classList.add("text-success");
+                containersubtotal.querySelector("#total-pagar").classList.add("text-success");
+
+
+                // Actualizar el contenido de los elementos con clases
+                containersubtotal.querySelector("#costos").textContent = `Costos`;
+                containersubtotal.querySelector("#subtotal").textContent = `Subtotal: $${totalSubtotal.toFixed(2)}`;
+                containersubtotal.querySelector("#costo-envio").textContent = `Costo de envío: $${costoenvio.toFixed(2)}`;
+                containersubtotal.querySelector("#total-pagar").textContent = `Total a pagar: $${totalPagar.toFixed(2)}`;
             }
         });
-
-        if (premium.checked) {
-            return totalSubtotal * 0.15;
-        } else if (express.checked) {
-            return totalSubtotal * 0.07;
-        } else if (standard.checked) {
-            return totalSubtotal * 0.05;
-        }
-        alert('debes agregar un método de pago'); // Si no se selecciona ningún método de envío
-    }
-
-     // Función para calcular los subtotales
-     function calcularSubtotales() {
-        const cartItems = document.querySelectorAll(".card");
-        let totalSubtotal = 0;
-        const costoenvio = calcularCostoEnvio();
-
-        cartItems.forEach((productDiv) => {
-            //selecciona el primer input de todos los elementos con clase card (ese input es el de cantidad)
-            const cantitdadinput = productDiv.querySelector('input');
-            //el value de cantidad input el cual es la cantidad, la almacena dentor de count, y usa parseint para redondear hacia abajo y que no permita decimale (ejemplo 1.5 peugeot)  
-            const count = parseInt(cantitdadinput.value);
-//seleccoina al elemento que tenga la clase .col-md-2 y sea h5 (el subtotal: usd $precio), y crea un array con el split separando asi ["usd","costdolares.toFixed(2) * producto.count"] y en ese array accede al precio o sea al costdolares.toFixed(2) * producto.count y lo muestra como contenido luego se convierte en un número de punto flotante utilizando parseFloat.
-            const unitCost = parseFloat(productDiv.querySelector('.col-md-2 h5').textContent.split(" ")[1]);
-//i hay un valor tanto en count como en unitcost (o sea que no son NaN) calcula el subtotal y a totalubtotal se le va sumando 
-            if (!isNaN(count) && !isNaN(unitCost)) {
-                const subtotal = count * unitCost;
-                totalSubtotal += subtotal;
-                
-            }
-        });
-
-        const totalPagar = totalSubtotal + costoenvio;
-
-        const containersubtotal = document.getElementById("subtotal-container");
-        containersubtotal.querySelector("#subtotal").classList.add("text-success"); 
-        containersubtotal.querySelector("#costo-envio").classList.add("text-success");
-        containersubtotal.querySelector("#total-pagar").classList.add("text-success"); 
-        
-        
-        // Actualizar el contenido de los elementos con clases
-        containersubtotal.querySelector("#costos").textContent = `Costos`;
-        containersubtotal.querySelector("#subtotal").textContent = `Subtotal: $${totalSubtotal.toFixed(2)}`;
-        containersubtotal.querySelector("#costo-envio").textContent = `Costo de envío: $${costoenvio.toFixed(2)}`;
-        containersubtotal.querySelector("#total-pagar").textContent = `Total a pagar: $${totalPagar.toFixed(2)}`;
-    }
 });
-});
+
+// Función para cambiar la forma de pago
+function cambiarFormaPago() {
+    const tipoPago = document.getElementById("tipoPago").value;
+    const numTarjeta = document.getElementById("numTarjeta");
+    const codigoSeg = document.getElementById("codigoSeg");
+    const vencimiento = document.getElementById("vencimiento");
+    const numCuenta = document.getElementById("numCuenta");
+
+    if (tipoPago === "tarjetaCredito") {
+        numTarjeta.disabled = false;
+        codigoSeg.disabled = false;
+        vencimiento.disabled = false;
+        numCuenta.disabled = true;
+    } else if (tipoPago === "transferencia") {
+        numTarjeta.disabled = true;
+        codigoSeg.disabled = true;
+        vencimiento.disabled = true;
+        numCuenta.disabled = false;
+    }
+}
+
+// Función para realizar el pago
+function realizarPago() {
+    const tipoPago = document.getElementById("tipoPago").value;
+    const numTarjeta = document.getElementById("numTarjeta").value;
+    const codigoSeg = document.getElementById("codigoSeg").value;
+    const vencimiento = document.getElementById("vencimiento").value;
+    const numCuenta = document.getElementById("numCuenta").value;
+
+    // Aquí puedes realizar las operaciones necesarias con los datos ingresados en el modal de pago
+    // ...
+
+    // Cerrar el modal después de realizar el pago
+    const modalPago = new bootstrap.Modal(document.getElementById('modalPago'));
+    modalPago.hide();
+}
