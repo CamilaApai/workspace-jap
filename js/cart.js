@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else if (standard.checked) {
                     return totalSubtotal * 0.05;
                 }
-                alert('debes agregar un método de pago'); // Si no se selecciona ningún método de envío
+              
             }
 
             // Función para calcular los subtotales
