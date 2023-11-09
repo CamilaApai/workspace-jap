@@ -157,15 +157,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 MostrarProductoEnCarrito(producto);
             });
             ///PARTE 1 ENTREGA 6
-            //busca por id el boton y lo guarda en realizarpedidobutton
-            const realizarPedidoButton = document.getElementById("realizar-pedido");
+          // Agregar evento al botón "Realizar Pedido"
+const realizarPedidoButton = document.getElementById("realizar-pedido");
+realizarPedidoButton.addEventListener("click", function (e) {
+    e.preventDefault(); 
 
-            // Agregar un evento click al botón "Realizar Pedido" para calcular los subtotales
-            realizarPedidoButton.addEventListener("click", function (e) {
-                e.preventDefault(); // Evita el envío del formulario por defecto
-                calcularSubtotales(); //llama a la funcion calcularsubtotales
+    // Realizar las validaciones
+    const nombreInput = document.getElementById("nombre");
+    const direccionInput = document.getElementById("direccion");
+    const ciudadInput = document.getElementById("ciudad");
 
-            });
+    // Validación de campos calle, número y esquina
+    if (nombreInput.checkValidity() && direccionInput.checkValidity() && ciudadInput.checkValidity()) {
+        // Los campos son válidos, puedes continuar con el proceso de envío.
+    } else {
+        // Al menos uno de los campos no es válido, no continúes y muestra los mensajes de validación.
+        nombreInput.setCustomValidity('Por favor, complete este campo.');
+        direccionInput.setCustomValidity('Por favor, complete este campo.');
+        ciudadInput.setCustomValidity('Por favor, complete este campo.');
+
+        // Actualiza las clases de los campos para mostrar los estilos de validación
+        nombreInput.classList.remove("is-valid");
+        direccionInput.classList.remove("is-valid");
+        ciudadInput.classList.remove("is-valid");
+        nombreInput.classList.add("is-invalid");
+        direccionInput.classList.add("is-invalid");
+        ciudadInput.classList.add("is-invalid");
+    }
+});
+
 
             // Agregar evento input para calcular el subtotal en función de la cantidad del producto
             //selecciona todo los input 
@@ -253,34 +273,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Agregar evento al botón "Realizar Pedido"
-        const realizarPedidoButton = document.getElementById("realizar-pedido");
-        realizarPedidoButton.addEventListener("click", function (e) {
-            e.preventDefault(); 
+    // Agregar evento al botón "Realizar Pedido"
+const realizarPedidoButton = document.getElementById("realizar-pedido");
+realizarPedidoButton.addEventListener("click", function (e) {
+    e.preventDefault(); 
 
-        // Realizar las validaciones
-        const nombreInput = document.getElementById("nombre");
-        const direccionInput = document.getElementById("direccion");
-        const ciudadInput = document.getElementById("ciudad");
-        const metodoEnvioInputs = document.querySelectorAll('input[name="metodo-envio"]');
-        const cantidadInputs = document.querySelectorAll('input[data-product-id]');
-
-        // Validación de campos calle, número y esquina
-        if (nombreInput.value.trim() === "" || direccionInput.value.trim() === "" || ciudadInput.value.trim() === "") {
-            alert("Los campos calle, número y esquina no pueden estar vacíos.");
-            return;
+    // Realizar las validaciones
+    const metodoEnvioInputs = document.querySelectorAll('input[name="metodo-envio"]');
+    
+    // Validación de forma de envío
+    let metodoEnvioSeleccionado = false;
+    metodoEnvioInputs.forEach((input) => {
+        if (input.checkValidity()) {
+            metodoEnvioSeleccionado = true;
         }
+    });
 
-        // Validación de forma de envío
-        let metodoEnvioSeleccionado = false;
-        metodoEnvioInputs.forEach((input) => {
-            if (input.checked) {
-                metodoEnvioSeleccionado = true;
-            }
-        });
-        if (!metodoEnvioSeleccionado) {
-            alert("Debes seleccionar una forma de envío.");
-            return;
-        }
+    if (!metodoEnvioSeleccionado) {
+        // No se ha seleccionado un método de envío, muestra el mensaje de validación.
+        metodoEnvioInputs[0].setCustomValidity('Por favor, selecciona un método de envío.');
+        metodoEnvioInputs[0].classList.add("is-invalid");
+    } else {
+        // Se ha seleccionado un método de envío, limpia el mensaje de validación y las clases.
+        metodoEnvioInputs[0].setCustomValidity('');
+        metodoEnvioInputs[0].classList.remove("is-invalid");
+    }
+});
+
 
         // Validación de cantidad para cada artículo
         cantidadInputs.forEach((input) => {
@@ -324,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
         calcularSubtotales();
-    });
+    
 
 
 // Función para cambiar la forma de pago
@@ -347,6 +366,3 @@ function cambiarFormaPago() {
         numCuenta.disabled = false;
     }
 }
-
-
-
