@@ -64,7 +64,7 @@
         <div class="col">
           <label for="validationCustom01" class="form-label">Primer nombre*</label>
           <input type="text" class="form-control" id="validationCustom01" required>
-          
+          <div class="invalid-feedback">Por favor, complete este campo.</div>
         </div>
         <div class="col">
           <label for="validationCustom02" class="form-label">Segundo nombre</label>
@@ -74,7 +74,7 @@
         <div class="col">
           <label for="validationCustom03" class="form-label">Primer apellido*</label>
           <input type="text" class="form-control" id="validationCustom03" required>
-          
+          <div class="invalid-feedback">Por favor, complete este campo.</div>
         </div>
         <div class="col">
           <label for="validationCustom04" class="form-label">Segundo apellido</label>
@@ -89,13 +89,13 @@
         <div class="col">
           <label for="validationCustom06" class="form-label">Teléfono de contacto*</label>
           <input type="text" class="form-control" id="validationCustom06" required>
-         
+          <div class="invalid-feedback">Por favor, complete este campo.</div>
         </div>
        
       </form>
 <hr>
 <div class="text-center">
-  <button class="btn btn-warning mx-auto" type="submit">Guardar cambios</button>
+  <button id="saveButton" class="btn btn-warning mx-auto" type="submit" onclick="guardarDatos()">Guardar cambios</button>
 </div>
     </div>
   </main>
