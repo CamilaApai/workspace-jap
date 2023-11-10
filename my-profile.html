@@ -91,7 +91,14 @@
           <input type="text" class="form-control" id="validationCustom06" required>
           <div class="invalid-feedback">Por favor, complete este campo.</div>
         </div>
-       
+        <div class="col">
+          <label for="validationCustom07" class="form-label">Imagen de perfil</label>
+          <input type="file" class="form-control" id="validationCustom07" accept="image/*" onchange="mostrarImagen()">
+        </div>
+        <div class="col">
+          <img id="imagenPerfil" src="default-profile-image.jpg" alt="Imagen de perfil" width="150" height="150">
+        </div>
+        
       </form>
 <hr>
 <div class="text-center">
