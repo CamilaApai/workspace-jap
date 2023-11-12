@@ -30,6 +30,7 @@ function guardarDatos() {
   const primerApellidoInput = document.getElementById("validationCustom03");
   const telefonoInput = document.getElementById("validationCustom06");
   const imagenInput = document.getElementById("validationCustom07");
+  
 
   // Verificar la validez de los campos
   const primerNombreValid = primerNombreInput.checkValidity();
@@ -89,6 +90,7 @@ function cargarDatos() {
   const primerApellido = localStorage.getItem("primerApellido");
   const telefono = localStorage.getItem("telefono");
   const imagenURL = localStorage.getItem("imagenPerfil");
+  const usuarioEmail = localStorage.getItem("usuariovalue");
 
   if (primerNombre) {
     document.getElementById("validationCustom01").value = primerNombre;
@@ -99,6 +101,9 @@ function cargarDatos() {
   if (telefono) {
     document.getElementById("validationCustom06").value = telefono;
   }
+  if (usuarioEmail) {
+    document.getElementById("validationCustom05").value = usuarioEmail;
+}
   // Mostrar la imagen de perfil almacenada
   const imagenPerfil = document.getElementById("imagenPerfil");
   if (imagenURL) {
