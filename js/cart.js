@@ -157,15 +157,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 MostrarProductoEnCarrito(producto);
             });
             ///PARTE 1 ENTREGA 6
-            //busca por id el boton y lo guarda en realizarpedidobutton
-            const realizarPedidoButton = document.getElementById("realizar-pedido");
+          // Agregar evento al botón "Realizar Pedido"
+const realizarPedidoButton = document.getElementById("realizar-pedido");
+realizarPedidoButton.addEventListener("click", function (e) {
+    e.preventDefault(); 
 
-            // Agregar un evento click al botón "Realizar Pedido" para calcular los subtotales
-            realizarPedidoButton.addEventListener("click", function (e) {
-                e.preventDefault(); // Evita el envío del formulario por defecto
-                calcularSubtotales(); //llama a la funcion calcularsubtotales
+    // Realizar las validaciones
+    const nombreInput = document.getElementById("nombre");
+    const direccionInput = document.getElementById("direccion");
+    const ciudadInput = document.getElementById("ciudad");
 
-            });
+    // Dentro del evento click del botón "Realizar Pedido"
+if (nombreInput.checkValidity() && direccionInput.checkValidity() && ciudadInput.checkValidity()) {
+    // Todas las validaciones se cumplen, aplica la clase "is-valid"
+    nombreInput.classList.remove("is-invalid");
+    direccionInput.classList.remove("is-invalid");
+    ciudadInput.classList.remove("is-invalid");
+
+    nombreInput.classList.add("is-valid");
+    direccionInput.classList.add("is-valid");
+    ciudadInput.classList.add("is-valid");
+} else {
+    // Al menos una validación no se cumple, aplica la clase "is-invalid"
+    nombreInput.classList.remove("is-valid");
+    direccionInput.classList.remove("is-valid");
+    ciudadInput.classList.remove("is-valid");
+
+    nombreInput.classList.add("is-invalid");
+    direccionInput.classList.add("is-invalid");
+    ciudadInput.classList.add("is-invalid");
+}
+
+    });
+
 
             // Agregar evento input para calcular el subtotal en función de la cantidad del producto
             //selecciona todo los input 
@@ -253,34 +277,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Agregar evento al botón "Realizar Pedido"
-        const realizarPedidoButton = document.getElementById("realizar-pedido");
-        realizarPedidoButton.addEventListener("click", function (e) {
-            e.preventDefault(); 
+    // Agregar evento al botón "Realizar Pedido"
+const realizarPedidoButton = document.getElementById("realizar-pedido");
+realizarPedidoButton.addEventListener("click", function (e) {
+    e.preventDefault(); 
 
-        // Realizar las validaciones
-        const nombreInput = document.getElementById("nombre");
-        const direccionInput = document.getElementById("direccion");
-        const ciudadInput = document.getElementById("ciudad");
-        const metodoEnvioInputs = document.querySelectorAll('input[name="metodo-envio"]');
-        const cantidadInputs = document.querySelectorAll('input[data-product-id]');
-
-        // Validación de campos calle, número y esquina
-        if (nombreInput.value.trim() === "" || direccionInput.value.trim() === "" || ciudadInput.value.trim() === "") {
-            alert("Los campos calle, número y esquina no pueden estar vacíos.");
-            return;
+    // Realizar las validaciones
+    const metodoEnvioInputs = document.querySelectorAll('input[name="metodo-envio"]');
+    
+    // Validación de forma de envío
+    let metodoEnvioSeleccionado = false;
+    metodoEnvioInputs.forEach((input) => {
+        if (input.checkValidity()) {
+            metodoEnvioSeleccionado = true;
         }
+    });
 
-        // Validación de forma de envío
-        let metodoEnvioSeleccionado = false;
-        metodoEnvioInputs.forEach((input) => {
-            if (input.checked) {
-                metodoEnvioSeleccionado = true;
-            }
-        });
-        if (!metodoEnvioSeleccionado) {
-            alert("Debes seleccionar una forma de envío.");
-            return;
-        }
+    if (!metodoEnvioSeleccionado) {
+        // No se ha seleccionado un método de envío, muestra el mensaje de validación.
+        metodoEnvioInputs[0].setCustomValidity('Por favor, selecciona un método de envío.');
+        metodoEnvioInputs[0].classList.add("is-invalid");
+    } else {
+        // Se ha seleccionado un método de envío, limpia el mensaje de validación y las clases.
+        metodoEnvioInputs[0].setCustomValidity('');
+        metodoEnvioInputs[0].classList.remove("is-invalid");
+    }
+});
+
 
         // Validación de cantidad para cada artículo
         cantidadInputs.forEach((input) => {
@@ -324,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
         calcularSubtotales();
-    });
+    
 
 
 // Función para cambiar la forma de pago
@@ -348,5 +371,57 @@ function cambiarFormaPago() {
     }
 }
 
+// Función para validar el número en tiempo real
+function validarNumero() {
+    const numeroInput = document.getElementById("numero");
+    const numeroValue = numeroInput.value.trim();
+
+    if (numeroValue === "") {
+        numeroInput.setCustomValidity("Por favor, ingresa el número.");
+        numeroInput.classList.add("is-invalid");
+    } else {
+        numeroInput.setCustomValidity("");
+        numeroInput.classList.remove("is-invalid");
+        numeroInput.classList.add("is-valid");
+    }
+}
+
+// Función para validar la calle en tiempo real
+function validarCalle() {
+    const calleInput = document.getElementById("calle");
+    const calleValue = calleInput.value.trim();
+
+    if (calleValue === "") {
+        calleInput.setCustomValidity("Por favor, ingresa la calle.");
+        calleInput.classList.add("is-invalid");
+    } else {
+        calleInput.setCustomValidity("");
+        calleInput.classList.remove("is-invalid");
+        calleInput.classList.add("is-valid");
+    }
+}
+
+// Función para validar la esquina en tiempo real
+function validarEsquina() {
+    const esquinaInput = document.getElementById("esquina");
+    const esquinaValue = esquinaInput.value.trim();
+
+    if (esquinaValue === "") {
+        esquinaInput.setCustomValidity("Por favor, ingresa la esquina.");
+        esquinaInput.classList.add("is-invalid");
+    } else {
+        esquinaInput.setCustomValidity("");
+        esquinaInput.classList.remove("is-invalid");
+        esquinaInput.classList.add("is-valid");
+    }
+}
+// Agregar eventos oninput a los campos
+const numeroInput = document.getElementById("numero");
+const calleInput = document.getElementById("calle");
+const esquinaInput = document.getElementById("esquina");
+
+numeroInput.addEventListener("input", validarNumero);
+calleInput.addEventListener("input", validarCalle);
+esquinaInput.addEventListener("input", validarEsquina);
 
 

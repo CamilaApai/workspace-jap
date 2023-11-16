@@ -313,15 +313,6 @@ html.noche {
   color: white !important; 
 }
 
-#comprarButton {
-  background-color: rgb(72, 209, 72);
-  border-radius: 10px;
-  color: white;
-  border-color: green;
-  padding: 6px;
-  font-size: 80%;
-  float: right; /* Alinea el botón a la derecha */
-}
 
 /* Cambiar el color de las letras a naranja */
 .navbar a {
