@@ -162,10 +162,14 @@ const realizarPedidoButton = document.getElementById("realizar-pedido");
 realizarPedidoButton.addEventListener("click", function (e) {
     e.preventDefault(); 
 
-    // Realizar las validaciones
-    const nombreInput = document.getElementById("nombre");
-    const direccionInput = document.getElementById("direccion");
-    const ciudadInput = document.getElementById("ciudad");
+   // Agregar eventos oninput a los campos de dirección
+   const nombreInput = document.getElementById("nombre");
+   const direccionInput = document.getElementById("direccion");
+   const ciudadInput = document.getElementById("ciudad");
+
+   nombreInput.addEventListener("input", validarNombre);
+   direccionInput.addEventListener("input", validarDireccion);
+   ciudadInput.addEventListener("input", validarCiudad);
 
     // Dentro del evento click del botón "Realizar Pedido"
 if (nombreInput.checkValidity() && direccionInput.checkValidity() && ciudadInput.checkValidity()) {
@@ -321,12 +325,18 @@ realizarPedidoButton.addEventListener("click", function (e) {
             return;
         }
 
-        // Realizar el pago
-        const tipoPago = document.getElementById("tipoPago").value;
-        const numTarjeta = document.getElementById("numTarjeta").value;
-        const codigoSeg = document.getElementById("codigoSeg").value;
-        const vencimiento = document.getElementById("vencimiento").value;
-        const numCuenta = document.getElementById("numCuenta").value;
+      // Agregar eventos oninput a los campos del formulario de pago
+      const tipoPagoInput = document.getElementById("tipoPago");
+      const numTarjetaInput = document.getElementById("numTarjeta");
+      const codigoSegInput = document.getElementById("codigoSeg");
+      const vencimientoInput = document.getElementById("vencimiento");
+      const numCuentaInput = document.getElementById("numCuenta");
+  
+      tipoPagoInput.addEventListener("change", cambiarFormaPago);
+      numTarjetaInput.addEventListener("input", validarNumTarjeta);
+      codigoSegInput.addEventListener("input", validarCodigoSeg);
+      vencimientoInput.addEventListener("input", validarVencimiento);
+      numCuentaInput.addEventListener("input", validarNumCuenta);
 
         if (tipoPago === "tarjetaCredito") {
             if (numTarjeta.trim() === "" || codigoSeg.trim() === "" || vencimiento.trim() === "") {
@@ -423,5 +433,48 @@ const esquinaInput = document.getElementById("esquina");
 numeroInput.addEventListener("input", validarNumero);
 calleInput.addEventListener("input", validarCalle);
 esquinaInput.addEventListener("input", validarEsquina);
+
+// Funciones de validación en tiempo real
+function validarNombre() {
+    const nombreInput = document.getElementById("nombre");
+    const nombreValue = nombreInput.value.trim();
+
+    if (nombreValue === "") {
+        nombreInput.setCustomValidity("Por favor, ingresa tu nombre.");
+        nombreInput.classList.add("is-invalid");
+    } else {
+        nombreInput.setCustomValidity("");
+        nombreInput.classList.remove("is-invalid");
+        nombreInput.classList.add("is-valid");
+    }
+}
+
+function validarDireccion() {
+    const direccionInput = document.getElementById("direccion");
+    const direccionValue = direccionInput.value.trim();
+
+    if (direccionValue === "") {
+        direccionInput.setCustomValidity("Por favor, ingresa tu dirección.");
+        direccionInput.classList.add("is-invalid");
+    } else {
+        direccionInput.setCustomValidity("");
+        direccionInput.classList.remove("is-invalid");
+        direccionInput.classList.add("is-valid");
+    }
+}
+
+function validarCiudad() {
+    const ciudadInput = document.getElementById("ciudad");
+    const ciudadValue = ciudadInput.value.trim();
+
+    if (ciudadValue === "") {
+        ciudadInput.setCustomValidity("Por favor, ingresa tu ciudad.");
+        ciudadInput.classList.add("is-invalid");
+    } else {
+        ciudadInput.setCustomValidity("");
+        ciudadInput.classList.remove("is-invalid");
+        ciudadInput.classList.add("is-valid");
+    }
+}
 
 
